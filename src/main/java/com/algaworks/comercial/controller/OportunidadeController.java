@@ -60,5 +60,16 @@ public class OportunidadeController {
 		
 		return oportunidades.save(oportunidade);
 	}
-
+	
+	@GetMapping("/delete/{id}")
+	@ResponseStatus(HttpStatus.OK)
+	public ResponseEntity<String> remover(@PathVariable Long id) {
+		System.out.println("deletando.."+id);
+		try {
+			oportunidades.deleteById(id);
+		} catch (Exception e) {
+			return new ResponseEntity<String>("Erro ao deletar oportunidade!", HttpStatus.OK);
+		}
+		return new ResponseEntity<String>("Oportunidade deletada com sucesso!", HttpStatus.OK) ;
+	}
 }
